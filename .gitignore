@@ -1,0 +1,4 @@
+venv
+passenger_wsgi.py
+*.pyc
+*.db

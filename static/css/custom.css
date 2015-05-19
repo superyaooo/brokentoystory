@@ -1,0 +1,36 @@
+.header-img {
+    height: 250px;
+    width: 250px;
+}
+
+.header h1 {
+    color: #b0bfbc;
+    font-family: 'Indie Flower', cursive;
+    font-size: 46px;
+}
+
+.header {
+    margin-top: 10px;
+}
+
+.well {
+    background-color: inherit;
+}
+
+#message-btn {
+    white-space: normal;
+}
+
+article p {
+    font-family: Arial, serif;
+    font-size: 17px;
+}
+
+article h3 {
+    font-family: fantasy, cursive, serif;
+}
+
+article img {
+    margin: 0 auto;
+}
+

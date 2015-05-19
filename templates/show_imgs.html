@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="header">
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="{{url_for('admin')}}" >Admin</a></li>
+            <li  class="active"><a href="{{url_for('show_imgs')}}" >Manage Images</a></li>
+            <li><a href="{{url_for('index')}}" >Broken Toy Story</a></li>
+            <li class="pull-right" ><a href="{{url_for('logout')}}">Log out</a></li>
+        </ul>
+    </div>  
+</div>
+
+<br>
+<br>
+
+{% for img in imgs %}
+
+        <div class="col-sm-4">
+            <img src="/static/img/{{img}}" style="height:100px; width:100px;">
+            <a class="btn btn-sm btn-danger" href="{{ url_for('remove_img', img=img) }}">delete</a>
+            <hr>
+        </div>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+{% endblock %}

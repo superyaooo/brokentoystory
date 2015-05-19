@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container">
+    <div class="header">
+        <br>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="{{url_for('admin')}}" >Admin</a></li>
+            <li><a href="{{url_for('show_imgs')}}" >Manage Images</a></li>
+            <li><a href="{{url_for('index')}}" >Broken Toy Story</a></li>
+            <li class="pull-right" ><a href="{{url_for('logout')}}">Log out</a></li>
+        </ul>
+    </div>  
+</div>
+
+
+<!-- add a post -->
+<div class="row container">
+    <div class="col-md-5 col-sm-5">
+        <br>
+        <h3>Add a Post!</h3>
+        <form action='/admin' method="post" enctype="multipart/form-data" >
+            <div class="form-group">
+                <label class="control-label"><h4>Title:</h4></label>
+                <input class="form-control" name="title">
+            </div>
+            
+            <div class="form-goup">
+                <h4>Choose a picture. </h4>        
+                <input type="file" name="file" class="btn btn-primary">
+            </div>
+
+            <div class="form-goup">
+                <label class="control-label"><h4>Content:</h4></label>
+                <textarea class="form-control" name="content"> </textarea>
+            </div>
+
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-sm btn-success" class="form-control">Submit</button>
+                <button type="reset" class="btn btn-sm btn-default" class="form-control">Never Mind</button>
+                
+            </div>
+          
+        </form>
+        
+        <!-- add another msg flash for ease of notice -->
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-info col-md-6 col-sm-6" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+    </div>
+       
+    <!-- show posts -->
+    <br>
+    <div class="col-sm-6 col-md-6  pull-right">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Current Posts</h3>
+            </div>
+            <div class="panel-body">
+                {% for post in posts.items|sort(attribute='id', reverse=True) %}
+                    <h4>{{ post.title }}</h4>
+                    <p>{{ post.pub_date }}</p>
+                    <img src="{{post.img_url}}" style="height:100px; width:100px">
+                    <p>{{ post.content|safe }}</p>
+                    <a href="{{ url_for('edit', id=post.id) }}" method="get" class="btn btn-xs btn-primary">Edit</a>
+                    <a href="{{ url_for('delete', id=post.id) }}" method="post" class="btn btn-xs btn-danger">Delete</a>
+
+                    <hr>
+                {% endfor %}
+
+                {% if posts.has_prev and posts.has_next %}
+                    <a href="{{ url_for('admin', page=posts.prev_num) }}">&lt;&lt; Newer posts |</a>
+                    <a href="{{ url_for('admin', page=posts.next_num) }}">Older posts &gt;&gt;</a>
+                {% elif posts.has_next and not posts.has_prev %}
+                    <a href="{{ url_for('admin', page=posts.next_num) }}">| Older posts &gt;&gt;</a>          
+                {% elif posts.has_prev and not posts.has_next %}
+                    <a href="{{ url_for('admin', page=posts.prev_num) }}">&lt;&lt; Newer posts |</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+     
+</div>
+
+     
+
+{% endblock %}
