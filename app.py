@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.bcrypt import Bcrypt
 from functools import wraps
 import os
 from werkzeug import secure_filename
@@ -13,6 +14,7 @@ POSTS_PER_PAGE_ADMIN=2
 
 #config
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 DEBUG = False
 app.secret_key = "IT'S A SECRET"
 
@@ -182,14 +184,17 @@ def remove_img(img):
 
 
 
-
+#hash username and password during login
 @app.route('/login', methods=['GET','POST'])
 def login():
     error = None
     if request.method=='POST':
-        if request.form['username']!= 'LOGINNAME':
+        pw_hash = bcrypt.generate_password_hash(password, 10)
+        usn_hash = bcrypt.generate_password_hash(username, 10)
+        
+        if not bcrypt.check_password_hash(usn_hash, request.form['username']):
             error = 'Invalid username. Please try again.'
-        elif request.form['password']!= 'LOGINPASSWORD':
+        elif not bcrypt.check_password_hash(pw_hash, request.form['password']):
             error = 'Invalid password. Please try again.'
         else:
             session['logged_in'] = True
