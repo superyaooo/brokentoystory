@@ -25,12 +25,14 @@
       <div class="container">
         <div class="row">
             <div class="col-md-4 pull-left">
-                <img class="header-img" src="static/img/brokentoyblogheader.JPG">
+                <a href="{{ url_for('index') }}"><img src="static/img/brokentoyblogheader.JPG"></a>
             </div>
             <div class="col-md-8 col-sm-6">
-                <h1>Milkshake</h1>
-                <h1>&</h1>
-                <h1>Broken Toy Story</h1>
+                <a href="{{ url_for('index') }}">
+                    <h1>Milkshake</h1>
+                    <h1>&</h1>
+                    <h1>Broken Toy Story</h1>
+                </a>
             </div>
 
             {% for message in get_flashed_messages() %}

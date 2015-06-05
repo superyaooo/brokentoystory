@@ -1,6 +1,5 @@
-.header-img {
-    height: 250px;
-    width: 250px;
+.header a {
+    text-decoration: none;
 }
 
 .header h1 {

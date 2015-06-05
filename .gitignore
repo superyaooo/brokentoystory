@@ -2,3 +2,4 @@ venv
 passenger_wsgi.py
 *.pyc
 *.db
+static/img/*
