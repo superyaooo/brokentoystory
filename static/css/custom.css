@@ -2,18 +2,13 @@
     text-decoration: none;
 }
 
-.header h1 {
-    color: #b0bfbc;
-    font-family: 'Indie Flower', cursive;
-    font-size: 46px;
-}
-
 .header {
     margin-top: 10px;
 }
 
 .well {
     background-color: inherit;
+    text-align: center;
 }
 
 #message-btn {
@@ -33,3 +28,14 @@ article img {
     margin: 0 auto;
 }
 
+@media screen and (min-width: 1200px) {
+    #header-img {
+        padding-top: 40px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #header-img {
+        padding-top: 3px;
+    }
+}
