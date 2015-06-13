@@ -6,6 +6,10 @@
     margin-top: 10px;
 }
 
+.header img {
+    max-height: 250px;
+}
+
 .well {
     background-color: inherit;
     text-align: center;
@@ -26,16 +30,4 @@ article h3 {
 
 article img {
     margin: 0 auto;
-}
-
-@media screen and (min-width: 1200px) {
-    #header-img {
-        padding-top: 40px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    #header-img {
-        padding-top: 3px;
-    }
 }
