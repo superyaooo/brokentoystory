@@ -73,18 +73,18 @@ def index(page=1):
         From: %s <%s>
         %s
         """ % (request.form['name'], request.form['email'], request.form['message'])
-        
+
         if not request.form['name']:
             flash('Your name cannot be empty in the message form. Please try again.')
         elif not request.form['message']:
-            flash('Message area cannot be empty in the message form. Please try again.') 
+            flash('Message area cannot be empty in the message form. Please try again.')
         elif not request.form['email']:
             flash('Email cannot be empty in the message form. Please try again.')
         else:
             mail.send(msg)
             flash('Thank you for your message. I\'ll get back to you soon.')
             return redirect(url_for('index'))
-        
+
 
     return render_template('index.html', posts=posts)
 
@@ -99,7 +99,7 @@ def admin(page=1):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
+
         elif file and not allowed_file(file.filename):
             flash('Only pictures are allowed to be uploaded!')
             return redirect(url_for('admin'))
@@ -107,8 +107,8 @@ def admin(page=1):
         elif not file:
             flash('Must upload a picture!')
             return redirect(url_for('admin'))
-            
-        
+
+
         new_post=BlogPost(
             request.form['title'],
             '/static/img/'+ filename,
@@ -138,12 +138,12 @@ def delete(id):
 @login_required
 def edit(id):
     post = db.session.query(BlogPost).get(id)
-    if request.method=='POST':    
+    if request.method=='POST':
         post.title = request.form['title']
         post.pub_date = request.form['pub_date']
         post.content = request.form['content']
 
-        # If choose to upload a new file, then set post.img_url to new file. 
+        # If choose to upload a new file, then set post.img_url to new file.
         file=request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -158,7 +158,7 @@ def edit(id):
         # If no file chosen, post.img_url stays the same as the current one.
         db.session.add(post)
         db.session.commit()
-                
+
         flash('Your changes have been saved.')
         return redirect(url_for('admin'))
 
@@ -169,12 +169,12 @@ def edit(id):
 # open static/img folder
 @app.route('/show_imgs',methods=['POST','GET'])
 @login_required
-def show_imgs():    
+def show_imgs():
     imgs = os.listdir(app.config['UPLOAD_FOLDER'])
 
     return render_template('show_imgs.html',imgs=imgs)
-    
-    
+
+
 # delete images in static/img folder
 @app.route('/remove_img/<img>',methods=['POST','GET'])
 @login_required
@@ -189,10 +189,10 @@ def remove_img(img):
 def login():
     error = None
     if request.method=='POST':
-        pw_hash = bcrypt.generate_password_hash(password, 10)
-        usn_hash = bcrypt.generate_password_hash(username, 10)
-        
-        if not bcrypt.check_password_hash(usn_hash, request.form['username']):
+    # removed password from main code, only use the hashed encrypted code here.
+        pw_hash = 'hashed version of password'
+
+        if request.form['username']!= username:
             error = 'Invalid username. Please try again.'
         elif not bcrypt.check_password_hash(pw_hash, request.form['password']):
             error = 'Invalid password. Please try again.'
@@ -225,4 +225,3 @@ def allowed_file(filename):
 
 if __name__ == '__main__':
     app.run()
-
