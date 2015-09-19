@@ -13,11 +13,13 @@
     <link href="{{url_for('static', filename='css/custom.css')}}" rel="stylesheet" type="text/css">
     <!-- favicon -->
     <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
-    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
   </head>
-    
-    
-    
+
+
+
   <body>
     <!-- Page Header -->
     <div class="header">
@@ -43,8 +45,8 @@
         <hr>
       </div>
     </div>
-      
-      
+
+
     <!-- page body -->
     <div class="container">
         <div class="row">
@@ -53,7 +55,7 @@
                 <!-- blog entry -->
                 <article>
                     {% for post in posts.items|sort(attribute='id', reverse=True) %}
-                 
+
                         <h3>{{ post.title }}</h3>
                         <span class="glyphicon glyphicon-calendar"></span>{{ post.pub_date }}
 
@@ -61,12 +63,12 @@
 
                         <p>{{ post.content|safe }}</p>
                         <br>
-                            
+
                     {% endfor %}
-                                          
+
                     <hr>
                 </article>
-                    
+
                     {% if posts.has_prev and posts.has_next %}
                         <nav>
                             <ul class="pager">
@@ -80,7 +82,7 @@
                                 <li class="next"><a href="{{ url_for('index', page=posts.next_num) }}" style="color: #b37571;">Next <span aria-hidden="true">&rarr;</span></a></li>
                             </ul>
                         </nav>
-                    
+
                     {% elif posts.has_prev and not posts.has_next %}
                         <nav>
                             <ul class="pager">
@@ -89,9 +91,9 @@
                             </ul>
                         </nav>
                     {% endif %}
-                
+
             </div>
-                
+
             <!-- blog side bar -->
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <!-- about -->
@@ -100,27 +102,30 @@
                     <p>Milkshake is a Miniature Poodle.
                     <br>He is a princessy boy with a mustache.
                     <br>He destroys toys for a living.</p>
+                    <a href="http://www.instagram.com/milkshake_brokentoystory" style="text-decoration:none; color:brown;"> <i class="fa fa-instagram fa-lg"></i> Milkshake on Instagram</a>
+                    <br>
+                    <br>
                     <h4>{ About Me }</h4>
                     <p>Check me out >> <a href="http://www.yaowangdev.com" style="color: #e0969f;"><em><strong>here</strong></em></a> <<</p>
                     <a href="#contact" data-toggle="modal" class="btn btn-default" style="color: #ba3744;" id="message-btn">Leave me a message</a>
-                    
+
                 </div>
-  
+
             </div>
         </div>
     </div>
-            
 
-    
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->   
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      
+
     <!-- contact form -->
     <div class="modal fade" id="contact" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="form-horizontal" role="form" method="post">    
+                <form class="form-horizontal" role="form" method="post">
                     <div class="modal-header">
                         <h4><span class="glyphicon glyphicon-pencil"></span> Message Board</h4>
                     </div>
@@ -150,10 +155,10 @@
                     </div>
                 </form>
             </div>
-        </div>  
+        </div>
     </div>
-         
-    <!-- end of contact form -->  
+
+    <!-- end of contact form -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
