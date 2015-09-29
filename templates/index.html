@@ -59,7 +59,7 @@
                         <h3>{{ post.title }}</h3></a>
                         <span class="glyphicon glyphicon-calendar"></span> {{ post.pub_date }}  ||  <span class="glyphicon glyphicon-comment"></span> <a href="{{ url_for('post', id=post.id) }}#disqus_thread" style="color:brown;"> Comment</a>
                         <br>
-                
+
                         <img src="{{post.img_url}}" class="img-responsive">
 
                         <p>{{ post.content|safe }}</p>
@@ -103,7 +103,9 @@
                     <p>Milkshake is a Miniature Poodle.
                     <br>He is a princessy boy with a mustache.
                     <br>He destroys toys for a living.</p>
+                    
                     <a href="https://www.instagram.com/milkshake_brokentoystory" style="text-decoration:none; color:brown;"> <i class="fa fa-instagram fa-lg"></i> Milkshake on Instagram</a>
+
                     <br>
                     <br>
                     <h4>{ About Me }</h4>
@@ -168,10 +170,10 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
-      
 
-        
-          
+
+
+
       <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES * * */
         var disqus_shortname = 'brokentoystory';
@@ -184,7 +186,7 @@
             (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
         }());
       </script>
-      
-      
+
+
   </body>
 </html>

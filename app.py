@@ -92,24 +92,24 @@ def index(page=1):
 
         return render_template('index.html', posts=posts)
 
-    
+
 @app.route('/post/<int:id>', methods=['GET','POST'])
 def post(id):
     post = db.session.query(BlogPost).get(id)
-    
+
     if post == None:
         return redirect(url_for('error'))
     else:
         return render_template('post.html', post=post)
 
-    
+
 
 @app.route('/error', methods=['GET'])
 def error():
     return render_template('error.html')
-    
 
-    
+
+
 @app.route('/admin', methods=['GET','POST'])
 @app.route('/admin/<int:page>', methods=['GET','POST'])
 @login_required
