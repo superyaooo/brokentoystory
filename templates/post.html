@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Broken Toy Story</title>
+
+     <!-- Bootstrap -->
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- custom css file -->
+    <link href="{{url_for('static', filename='css/custom.css')}}" rel="stylesheet" type="text/css">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+
+  </head>
+    
+  <body>
+    <!-- Page Header -->
+    <div class="header">
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-4 pull-left">
+                <a href="{{ url_for('index') }}"><img src="/static/img/brokentoyblogheader.JPG" class="img-responsive"></a>
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-7 col-xs-7">
+                <a href="{{ url_for('index') }}">
+                    <img src="/static/header.svg" class="img-responsive" id="svg-header">
+                </a>
+            </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+      
+    <!-- blog entry -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="{{ url_for('index') }}" style="text-decoration: none; color:brown;"><< Back to Home</a>
+            </div>
+
+            <div class="col-md-10 text-center">
+                <article>
+                    <h3>{{ post.title }}</h3>
+                    <span class="glyphicon glyphicon-calendar"></span>{{ post.pub_date }}
+
+                    <img src="{{post.img_url}}" class="img-responsive">
+
+                    <p>{{ post.content|safe }}</p>
+                    <br>
+                </article>
+                
+                <div id="disqus_thread"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES * * */
+                        var disqus_shortname = 'brokentoystory';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                
+            </div>
+        </div>
+    </div>
+      
+    <footer class="footer">
+        <div class="container">
+            <hr>
+            <p>© 2015 brokentoystory.com, all rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+
+  </body>
+</html>

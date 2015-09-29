@@ -66,30 +66,50 @@ def login_required(f):
 def index(page=1):
     query = models.BlogPost.query.order_by(BlogPost.id.desc())
     posts = query.paginate(page, POSTS_PER_PAGE, False)
+    counts = db.session.query(BlogPost).count()
 
-    if request.method == 'POST':
-        msg = Message('New message from BrokenToyStory', sender='superyaooo@gmail.com', recipients=['superyaooo@gmail.com'])
-        msg.body = """
-        From: %s <%s>
-        %s
-        """ % (request.form['name'], request.form['email'], request.form['message'])
+    if page > counts:
+        return redirect(url_for('error'))
+    else:
+        if request.method == 'POST':
+            msg = Message('New message from BrokenToyStory', sender='superyaooo@gmail.com', recipients=['superyaooo@gmail.com'])
+            msg.body = """
+            From: %s <%s>
+            %s
+            """ % (request.form['name'], request.form['email'], request.form['message'])
 
-        if not request.form['name']:
-            flash('Your name cannot be empty in the message form. Please try again.')
-        elif not request.form['message']:
-            flash('Message area cannot be empty in the message form. Please try again.')
-        elif not request.form['email']:
-            flash('Email cannot be empty in the message form. Please try again.')
-        else:
-            mail.send(msg)
-            flash('Thank you for your message. I\'ll get back to you soon.')
-            return redirect(url_for('index'))
+            if not request.form['name']:
+                flash('Your name cannot be empty in the message form. Please try again.')
+            elif not request.form['message']:
+                flash('Message area cannot be empty in the message form. Please try again.')
+            elif not request.form['email']:
+                flash('Email cannot be empty in the message form. Please try again.')
+            else:
+                mail.send(msg)
+                flash('Thank you for your message. I\'ll get back to you soon.')
+                return redirect(url_for('index'))
 
 
-    return render_template('index.html', posts=posts)
+        return render_template('index.html', posts=posts)
 
+    
+@app.route('/post/<int:id>', methods=['GET','POST'])
+def post(id):
+    post = db.session.query(BlogPost).get(id)
+    
+    if post == None:
+        return redirect(url_for('error'))
+    else:
+        return render_template('post.html', post=post)
 
+    
 
+@app.route('/error', methods=['GET'])
+def error():
+    return render_template('error.html')
+    
+
+    
 @app.route('/admin', methods=['GET','POST'])
 @app.route('/admin/<int:page>', methods=['GET','POST'])
 @login_required
