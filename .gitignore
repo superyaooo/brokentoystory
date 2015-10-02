@@ -3,4 +3,4 @@ passenger_wsgi.py
 *.pyc
 *.db
 static/img/*
-*.DS_Store
+.DS_Store
