@@ -5,7 +5,7 @@ from functools import wraps
 import os
 from werkzeug import secure_filename
 from flask_mail import Mail, Message
-
+from flask_sslify import SSLify
 
 
 POSTS_PER_PAGE=1
@@ -15,6 +15,7 @@ POSTS_PER_PAGE_ADMIN=2
 #config
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+sslify=SSLify(app)
 DEBUG = False
 app.secret_key = "IT'S A SECRET"
 
